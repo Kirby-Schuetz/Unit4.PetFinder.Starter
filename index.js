@@ -22,7 +22,7 @@ app.get('/api', (req, res) => {
 
 // get all pets from the database
 app.get('/api/v1/pets', (req, res) => {
-    // send the pets array as a response
+    // send the pets array from the database as a response
     res.send(pets);
     // url has to be as follows in the browser:
     // http://localhost:8080/api/v1/pets
@@ -34,7 +34,7 @@ app.get('/api/v1/pets/owner', (req, res) => {
     const { owner } = req.query;
 
     // find the pet in the pets array
-    const pet = pets.find(pet => pet.owner === owner);
+    const pet = pets.filter(pet => pet.owner === owner);
 
     // send the pet as a response
     res.send(pet);
@@ -48,7 +48,7 @@ app.get('/api/v1/pets/:name', (req, res) => {
     const { name } = req.params;
 
     // find the pet in the pets array
-    const pet = pets.find(pet => pet.name === name);
+    const pet = pets.find(pet => pet.name.toLowerCase() === name.toLowerCase());
 
     // send the pet as a response
     res.send(pet);
